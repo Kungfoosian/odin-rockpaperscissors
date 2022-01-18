@@ -41,14 +41,14 @@ function playRound(playerSelection, computerSelection) {
     return isPlayerLose;
 }
 
-function game(rounds = 1) {
+const game = event => {
     const VALID_CHOICES = ['rock', 'paper', 'scissors'];
     let playerSelection = '';
     let playerScore = 0;
     let computerScore = 0;
     let isPlayerLose;
     
-    for(let i = 0; i < rounds; i++) {
+
         do {
             playerSelection = getPlayerChoice();
         }
@@ -67,11 +67,22 @@ function game(rounds = 1) {
         else {
             console.log("It's a tie!");
         }
-    }
+
 
 
     if(computerScore > playerScore) console.log('You lose!');
     else if(computerScore < playerScore) console.log('You win!');
-    else console.log("It's a tie!");
+
 }
 
+
+
+/////////    DOM MANIPULATION   /////////
+let buttons = document.querySelectorAll('button');
+buttons.forEach(button => {
+    // console.log(button.attributes);
+    // button.addEventListener('click', () => game());
+    button.addEventListener('click', game);
+})
+
+// console.log(buttons.);
