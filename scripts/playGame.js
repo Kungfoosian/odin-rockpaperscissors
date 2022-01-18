@@ -37,7 +37,8 @@ function resetScore() {
 
 function resetGame() {
     resetScore();
-    // winMsgHTML.innerText = 'NO WINNERS';
+    someoneWon = false;
+    winMsgHTML.innerText = 'NO WINNERS';
 }
 
 function displayWinMessage(winner)
@@ -59,13 +60,14 @@ function game (event) {
     displayScore(playerScore, computerScore);
     
     
-    if(playerScore === 5){ 
+    if(someoneWon) resetGame();
+    else if(playerScore === 5){ 
         displayWinMessage('player');
-        resetGame();
+        someoneWon=true;
     } 
     else if(computerScore === 5) {
         displayWinMessage('computer');
-        resetGame();
+        someoneWon=true;
     }
 }
 
@@ -77,13 +79,17 @@ const btnPaper = document.querySelector('#paper');
 const btnScissors = document.querySelector('#scissors');
 
 let playerSelection;
-let playerScore = 0;
-let computerScore = 0;
+
 const playerScoreHTML = document.querySelector('.score-player');
+let playerScore = 0;
 const computerScoreHTML = document.querySelector('.score-computer');
+let computerScore = 0;
 
 const winMsgHTML = document.querySelector('.win-msg');
 
+let someoneWon = false;
+
+resetGame();
 
 btnRock.addEventListener('click', () => {
     playerSelection = btnRock.value;
