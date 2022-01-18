@@ -7,16 +7,26 @@ body{
     margin:0;
 }
 
-.title, .btn-container, .win-msg, .score-container {
+.title, .btn-container, .win-msg, .score-container, .score-player-container, .score-computer-container {
     border: 1px solid red;
 }
+
+.btn-container, .score-container,.score-player-container
+, .score-computer-container, .score-divider-container
+, .win-msg-container, footer  {
+    display: flex;
+}
+
+.score-player-container, .score-computer-container{
+    flex-direction: column;
+}
+
 
 .title {
     text-align: center;
 }
 
 .btn-container {
-    display: flex;
     justify-content: center;
     height: 20%;
 }
@@ -39,5 +49,49 @@ body{
     transform: translateY(4px);
   }
 
+.win-msg-container {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+}
 
 
+.win-msg {
+    font-weight: bold;
+    margin:0;
+    font-size: 40px;
+}
+
+.score-container {
+    justify-content: space-around;
+    padding: 0 25%;
+}
+
+.score-divider-container {
+    align-items: center;
+    font-size: 50px;
+}
+
+.score-player-title, .score-computer-title {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 8px 10px 22px;
+}
+
+.score-computer, .score-player {
+    text-align: center;
+    font-family: lato;
+    font-size: 50px;
+    margin: 0;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}

@@ -38,7 +38,7 @@ function resetScore() {
 function resetGame() {
     resetScore();
     someoneWon = false;
-    winMsgHTML.innerText = 'NO WINNERS';
+    winMsgHTML.innerText = '';
 }
 
 function displayWinMessage(winner)
