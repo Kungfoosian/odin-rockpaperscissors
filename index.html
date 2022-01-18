@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Odin - Rock Paper Scissors</title>
     <script src="./scripts/playGame.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <h1 class='title'> Rock, Paper, Scissors</h1>
     <div class='btn-container'>
-        <button id='rock' value='rock'>Rock</button>
-        <button id='paper' value='paper'>Paper</button>
-        <button id='scissors' value='scissors'>Scissors</button>
+        <button class='btn' id='rock'     value='rock'>    <i class='far fa-hand-rock fa-7x'></i></button>
+        <button class='btn' id='paper'    value='paper'>   <i class="far fa-hand-paper fa-7x"></i></button>
+        <button class='btn' id='scissors' value='scissors'><i class="far fa-hand-scissors fa-7x"></i></button>
     </div>
 
     <p class='win-msg'></p>
@@ -21,5 +24,7 @@
         <p class='score-divider'>-</p>
         <p class='score-computer'>0</p>
     </div>
+
+    <footer>Odin Project 2022</footer>
 </body>
 </html>

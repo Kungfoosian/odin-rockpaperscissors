@@ -7,22 +7,20 @@ function computerPlay() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    let isPlayerLose = null;
-
     if( playerSelection === 'rock') {
-        if( computerSelection == 'paper') isPlayerLose = true;
-        else if( computerSelection == 'scissors') isPlayerLose = false;
+        if( computerSelection == 'paper') return 'computer';
+        else if( computerSelection == 'scissors') return 'player';
     }
     else if( playerSelection === 'paper') {
-        if(computerSelection == 'scissors') isPlayerLose = true;
-        if(computerSelection == 'rock') isPlayerLose = false;
+        if(computerSelection == 'scissors') return 'computer';
+        if(computerSelection == 'rock') return 'player';
     }
     else if( playerSelection === 'scissors') {
-        if(computerSelection == 'rock') isPlayerLose = true;
-        if(computerSelection == 'paper') isPlayerLose = false;
+        if(computerSelection == 'rock') return 'computer';
+        if(computerSelection == 'paper') return 'player';
     }
 
-    return isPlayerLose;
+    return 'tie';
 }
 
 function displayScore(playerScore, computerScore) {
@@ -31,8 +29,15 @@ function displayScore(playerScore, computerScore) {
 }
 
 function resetScore() {
-    playerScoreHTML.innerText = 0;
-    computerScoreHTML.innerText = 0;
+    playerScore = 0;
+    computerScore = 0;
+    playerScoreHTML.innerText = playerScore;
+    computerScoreHTML.innerText = computerScore;
+}
+
+function resetGame() {
+    resetScore();
+    // winMsgHTML.innerText = 'NO WINNERS';
 }
 
 function displayWinMessage(winner)
@@ -41,16 +46,13 @@ function displayWinMessage(winner)
 }
 
 function game (event) {
-    let playerSelection = event.path[0].id;
-    let isPlayerLose;
-    
+    let computerSelection = computerPlay();
 
-
-    isPlayerLose = playRound(playerSelection, computerPlay());
-    if(isPlayerLose){
+    let roundResult = playRound(playerSelection, computerSelection);
+    if(roundResult === 'computer'){
         computerScore++;
     }
-    else if(!isPlayerLose) {
+    else if(roundResult === 'player') {
         playerScore++;
     }
     
@@ -59,13 +61,11 @@ function game (event) {
     
     if(playerScore === 5){ 
         displayWinMessage('player');
-        resetScore();
-        return;
+        resetGame();
     } 
     else if(computerScore === 5) {
         displayWinMessage('computer');
-        resetScore();
-        return;
+        resetGame();
     }
 }
 
@@ -76,13 +76,25 @@ const btnRock = document.querySelector('#rock');
 const btnPaper = document.querySelector('#paper');
 const btnScissors = document.querySelector('#scissors');
 
-btnRock.addEventListener('click', game);
-btnPaper.addEventListener('click', game);
-btnScissors.addEventListener('click', game);
-
+let playerSelection;
 let playerScore = 0;
 let computerScore = 0;
 const playerScoreHTML = document.querySelector('.score-player');
 const computerScoreHTML = document.querySelector('.score-computer');
 
 const winMsgHTML = document.querySelector('.win-msg');
+
+
+btnRock.addEventListener('click', () => {
+    playerSelection = btnRock.value;
+    game();
+})
+btnPaper.addEventListener('click', () => {
+    playerSelection = btnPaper.value;
+    game();
+})
+btnScissors.addEventListener('click', () => {
+    playerSelection = btnScissors.value;
+    game();
+})
+
