@@ -25,33 +25,48 @@ function playRound(playerSelection, computerSelection) {
     return isPlayerLose;
 }
 
-const game = event => {
+function displayScore(playerScore, computerScore) {
+    playerScoreHTML.innerText = playerScore;
+    computerScoreHTML.innerText = computerScore;
+}
+
+function resetScore() {
+    playerScoreHTML.innerText = 0;
+    computerScoreHTML.innerText = 0;
+}
+
+function displayWinMessage(winner)
+{
+    winMsgHTML.innerText = `${winner} wins!`;
+}
+
+function game (event) {
     let playerSelection = event.path[0].id;
-    let playerScore = 0;
-    let computerScore = 0;
     let isPlayerLose;
     
 
 
     isPlayerLose = playRound(playerSelection, computerPlay());
-
     if(isPlayerLose){
         computerScore++;
-        console.log("You lose this round :(");
     }
     else if(!isPlayerLose) {
         playerScore++;
-        console.log("You win this round!");
     }
-    else {
-        console.log("It's a tie!");
+    
+    displayScore(playerScore, computerScore);
+    
+    
+    if(playerScore === 5){ 
+        displayWinMessage('player');
+        resetScore();
+        return;
+    } 
+    else if(computerScore === 5) {
+        displayWinMessage('computer');
+        resetScore();
+        return;
     }
-
-
-
-    if(computerScore > playerScore) console.log('You lose!');
-    else if(computerScore < playerScore) console.log('You win!');
-
 }
 
 
@@ -65,4 +80,9 @@ btnRock.addEventListener('click', game);
 btnPaper.addEventListener('click', game);
 btnScissors.addEventListener('click', game);
 
-// console.log(btnRock.value);
+let playerScore = 0;
+let computerScore = 0;
+const playerScoreHTML = document.querySelector('.score-player');
+const computerScoreHTML = document.querySelector('.score-computer');
+
+const winMsgHTML = document.querySelector('.win-msg');
