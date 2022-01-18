@@ -6,22 +6,6 @@ function computerPlay() {
             : 'scissors';
 }
 
-function checkValid(input, validChoices) {
-    input = input.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,"");
-    input = input.trim();
-    input = input.toLowerCase();
-
-    for(let i = 0; i < validChoices.length; i++) {
-        if(input === validChoices[i]) return input;
-    }
-
-    return null;
-}
-
-function getPlayerChoice(){
-    return prompt('Make a selection (Rock, Paper, Scissors):');
-}
-
 function playRound(playerSelection, computerSelection) {
     let isPlayerLose = null;
 
@@ -42,31 +26,26 @@ function playRound(playerSelection, computerSelection) {
 }
 
 const game = event => {
-    const VALID_CHOICES = ['rock', 'paper', 'scissors'];
-    let playerSelection = '';
+    let playerSelection = event.path[0].id;
     let playerScore = 0;
     let computerScore = 0;
     let isPlayerLose;
     
 
-        do {
-            playerSelection = getPlayerChoice();
-        }
-        while(!checkValid(playerSelection,VALID_CHOICES));
 
-        isPlayerLose = playRound(playerSelection, computerPlay());
+    isPlayerLose = playRound(playerSelection, computerPlay());
 
-        if(isPlayerLose){
-            computerScore++;
-            console.log("You lose this round :(");
-        }
-        else if(!isPlayerLose) {
-            playerScore++;
-            console.log("You win this round!");
-        }
-        else {
-            console.log("It's a tie!");
-        }
+    if(isPlayerLose){
+        computerScore++;
+        console.log("You lose this round :(");
+    }
+    else if(!isPlayerLose) {
+        playerScore++;
+        console.log("You win this round!");
+    }
+    else {
+        console.log("It's a tie!");
+    }
 
 
 
@@ -78,11 +57,12 @@ const game = event => {
 
 
 /////////    DOM MANIPULATION   /////////
-let buttons = document.querySelectorAll('button');
-buttons.forEach(button => {
-    // console.log(button.attributes);
-    // button.addEventListener('click', () => game());
-    button.addEventListener('click', game);
-})
+const btnRock = document.querySelector('#rock');
+const btnPaper = document.querySelector('#paper');
+const btnScissors = document.querySelector('#scissors');
 
-// console.log(buttons.);
+btnRock.addEventListener('click', game);
+btnPaper.addEventListener('click', game);
+btnScissors.addEventListener('click', game);
+
+// console.log(btnRock.value);
