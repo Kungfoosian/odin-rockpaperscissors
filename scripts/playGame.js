@@ -35,8 +35,27 @@ function resetScore() {
     computerScoreHTML.innerText = computerScore;
 }
 
+function disableButtons() {
+    btnRock.disabled = true;
+    btnScissors.disabled = true;
+    btnPaper.disabled = true;
+    btnRock.classList.add('disabled');
+    btnPaper.classList.add('disabled');
+    btnScissors.classList.add('disabled');
+}
+
+function enableButtons() {
+    btnRock.disabled = false;
+    btnScissors.disabled = false;
+    btnPaper.disabled = false;
+    btnRock.classList.remove('disabled');
+    btnPaper.classList.remove('disabled');
+    btnScissors.classList.remove('disabled');
+}
+
 function resetGame() {
     resetScore();
+    enableButtons();
     someoneWon = false;
     winMsgHTML.innerText = '';
 }
@@ -63,10 +82,12 @@ function game (event) {
     if(someoneWon) resetGame();
     else if(playerScore === 5){ 
         displayWinMessage('player');
+        disableButtons();
         someoneWon=true;
     } 
     else if(computerScore === 5) {
         displayWinMessage('computer');
+        disableButtons();
         someoneWon=true;
     }
 }
@@ -77,6 +98,7 @@ function game (event) {
 const btnRock = document.querySelector('#rock');
 const btnPaper = document.querySelector('#paper');
 const btnScissors = document.querySelector('#scissors');
+const btnReset = document.querySelector('#restart');
 
 let playerSelection;
 
@@ -102,5 +124,9 @@ btnPaper.addEventListener('click', () => {
 btnScissors.addEventListener('click', () => {
     playerSelection = btnScissors.value;
     game();
+})
+
+btnReset.addEventListener('click', () => {
+    resetGame();
 })
 

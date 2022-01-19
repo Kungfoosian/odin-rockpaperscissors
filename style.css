@@ -7,10 +7,6 @@ body{
     margin:0;
 }
 
-.title, .btn-container, .win-msg, .score-container, .score-player-container, .score-computer-container {
-    border: 1px solid red;
-}
-
 .btn-container, .score-container,.score-player-container
 , .score-computer-container, .score-divider-container
 , .win-msg-container, footer  {
@@ -44,6 +40,11 @@ body{
   color: white;
 }
 
+.disabled {
+    pointer-events: none;
+    opacity: 0.3;
+  }
+
 .btn:active {
     background-color: #3e8e41;
     transform: translateY(4px);
@@ -54,8 +55,12 @@ body{
     justify-content: center;
     align-items: center;
     height: 100px;
+    margin: 20px 0;
 }
 
+.btn#restart {
+    margin:0;
+}
 
 .win-msg {
     font-weight: bold;
